@@ -1,0 +1,39 @@
+name: Flutter Android CI
+
+# 1. WHEN should this run
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# 2. WHAT machine to run on
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Get the code from GitHub
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Flutter
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: stable
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Step 4: Run tests (optional but recommended)
+      - name: Run tests
+        run: flutter test
+
+      # Step 5: Build Android App Bundle (AAB)
+      - name: Build Android App Bundle
+        run: flutter build appbundle --release

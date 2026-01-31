@@ -6,16 +6,24 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'auth.dart';
 import 'notes.dart';
 
+Future<void> initializeSupabase() async {
+  await Supabase.initialize(
+    url: 'https://brgqibyzsndnruksjxsp.supabase.co',
+    anonKey: 'sb_publishable_fXYDqrrmJkSi7Vn35HNzQw_ITYm0A0u',
+  );
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
   // await FirebaseMessaging.instance.requestPermission();
   // final fcmToken = await FirebaseMessaging.instance.getToken();
   // print("fcm token is : $fcmToken");
-  await Supabase.initialize(
-    url: 'https://brgqibyzsndnruksjxsp.supabase.co',
-    anonKey: 'sb_publishable_fXYDqrrmJkSi7Vn35HNzQw_ITYm0A0u',
-  );
+  await initializeSupabase();
+  // await Supabase.initialize(
+  //   url: 'https://brgqibyzsndnruksjxsp.supabase.co',
+  //   anonKey: 'sb_publishable_fXYDqrrmJkSi7Vn35HNzQw_ITYm0A0u',
+  // );
   runApp(GetMaterialApp(home: const MyApp()));
 }
 
